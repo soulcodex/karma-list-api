@@ -7,12 +7,17 @@
 - Prefer concise outputs that state the result, evidence, and next action.
 - Preserve existing project constraints. Do not treat an instruction as evidence that an implementation behaves as described.
 
-## Lazy router
+## Lazy context router
 
-- Before changing Python code, tests, or type configuration, read `docs/CODE_STYLE_GUIDES.md`.
-- Before changing boundaries, persistence, dependencies, or package structure, read `docs/ARCHITECTURE.md`.
-- Before changing Karma behavior, API contracts, or business tests, read `docs/context/karma/INDEX.md`.
-- Do not preload every document. Read only the guidance that the current task needs.
+Read the source before taking the matching action. Load only the rows the task needs.
+
+| Source | Read when | What it governs |
+| --- | --- | --- |
+| `docs/CODE_STYLE_GUIDES.md` | Changing Python code, tests, type configuration, or module structure. | Typed boundaries, domain isolation, test quality, and the module-size signal. |
+| `docs/ARCHITECTURE.md` | Changing boundaries, persistence, dependencies, package structure, or adapter direction. | The HTTP edge, Karma domain, storage boundary, and explicit exclusions. |
+| `docs/context/karma/INDEX.md` | Changing Karma behavior, API contracts, request models, domain policy, or business tests. | The goal, vocabulary, invariants, HTTP contract, time semantics, and non-goals. |
+
+Do not preload every document. Read the smallest applicable context before planning or editing.
 
 ## Verification
 
