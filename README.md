@@ -24,6 +24,4 @@ uv run pyright
 uv run pylint src
 uv run pytest
 uv run python tools/check_type_boundaries.py src
-pnpm install
-pnpm check:markdown
 ```

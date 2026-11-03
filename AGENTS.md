@@ -28,5 +28,4 @@ Do not preload every document. Read the smallest applicable context before plann
 - Business tests must show an observable Karma rule or a credible regression.
 - Formatting, linting, type checking, and module-size checks support review. They do not prove
   business behavior.
-- Run `pnpm check:markdown` after Markdown changes and
-  `uv run python tools/check_type_boundaries.py src` after changing Python signatures.
+- Run `uv run python tools/check_type_boundaries.py src` after changing Python signatures.

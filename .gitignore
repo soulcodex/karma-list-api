@@ -7,4 +7,3 @@ __pycache__/
 .pyright/
 .coverage
 karma.db
-node_modules/
