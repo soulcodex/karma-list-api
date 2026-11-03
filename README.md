@@ -25,7 +25,6 @@ uv run ruff check .
 uv run pyright
 uv run pylint src
 uv run pytest
-uv run python tools/check_type_boundaries.py src
 ```
 
 Format Markdown with `uv run rumdl fmt .`.
