@@ -1,0 +1,1 @@
+"""Karma List workshop service."""
