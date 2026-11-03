@@ -6,4 +6,5 @@ __pycache__/
 .mypy_cache/
 .pyright/
 .coverage
-karma-list.db
+karma.db
+node_modules/

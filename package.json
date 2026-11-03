@@ -1,0 +1,15 @@
+{
+  "name": "karma-api-tools",
+  "private": true,
+  "packageManager": "pnpm@11.17.0",
+  "scripts": {
+    "format:markdown": "prettier --write \"**/*.md\"",
+    "check:markdown-format": "prettier --check \"**/*.md\"",
+    "lint:markdown": "markdownlint-cli2",
+    "check:markdown": "pnpm check:markdown-format && pnpm lint:markdown"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "0.24.0",
+    "prettier": "3.9.10"
+  }
+}

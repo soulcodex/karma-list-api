@@ -2,10 +2,12 @@
 
 from fastapi import FastAPI
 
-app = FastAPI(title="Karma List API")
+from karma.contracts import HealthResponse
+
+app = FastAPI(title="Karma API")
 
 
 @app.get("/health")
-def health() -> dict[str, str]:
+def health() -> HealthResponse:
     """Report that the workshop service is running."""
-    return {"status": "ok"}
+    return HealthResponse(status="ok")

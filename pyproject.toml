@@ -1,7 +1,7 @@
 [project]
-name = "karma-list-api"
+name = "karma-api"
 version = "0.1.0"
-description = "Workshop companion service for a small Karma List API"
+description = "Workshop companion service for a small Karma API"
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
 dependencies = [
@@ -23,7 +23,7 @@ requires = ["hatchling>=1.26"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/karma_list"]
+packages = ["src/karma"]
 
 [tool.ruff]
 target-version = "py312"
