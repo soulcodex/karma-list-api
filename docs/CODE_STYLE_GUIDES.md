@@ -6,8 +6,9 @@
 - Keep Karma policy in domain code that has no FastAPI or storage dependency.
 - Use DTOs, value objects, and explicit domain types for every function input and output that
   carries structured data.
-- Do not use `dict`, `Dict`, `Mapping`, or `MutableMapping` in a function signature by default. A
-  plain dictionary needs an explicit reason why a DTO or value object would be misleading.
+- Do not use `dict`, `Dict`, `Mapping`, or `MutableMapping` in a function signature by default. The
+  repository check rejects them unless the immediately preceding line has a `# plain-dict:` comment
+  that explains why a DTO or value object would be misleading.
 - A justified plain dictionary still needs precise key and value types. It cannot use `Any` as a
   substitute for a DTO.
 - Do not pass unstructured dictionaries through domain code.

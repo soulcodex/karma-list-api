@@ -30,3 +30,4 @@ Do not preload every document. Read the smallest applicable context before plann
   business behavior.
 - Run `uv run rumdl fmt --check --deny-config-warnings .` and
   `uv run rumdl check --deny-config-warnings .` after changing Markdown.
+- Run `uv run python tools/check_type_boundaries.py src` after changing Python signatures.
