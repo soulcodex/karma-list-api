@@ -2,31 +2,24 @@
 
 Companion Python repository for **The Agent Is Not the System** workshop.
 
-It starts as a small FastAPI service and evolves into a functional Karma API through the workshop
-prompts. It is not a production-ready service.
+It provides a small functional FastAPI service for one focused workshop change. It is not a
+production-ready service.
 
 ## Workshop tasks
 
-The primary outcome is a configurable, portable harness. Karma API is the small service used to
-validate it.
+The primary outcome is a configurable, portable router. Karma API is the small service used to
+validate its guidance.
 
 - [ ] Establish a factual baseline of the Karma API and its current constraints.
-- [ ] Create a portable harness kernel with a root `AGENTS.md`, lazy context routing, transversal
-  rules, architecture guidance, and skills or agent definitions.
-- [ ] Configure the kernel for the chosen host: OpenCode, Codex, or Pi.
-- [ ] Give the agent a small, evidence-based feature task and require concise reporting of evidence,
-  changes, and verification.
-- [ ] Add deterministic quality gates that the agent cannot negotiate away.
-- [ ] Implement the Karma API slice with typed boundaries, value objects, business-rule tests, and
-  in-memory persistence.
-- [ ] Introduce a realistic bad change or incomplete solution and use the harness plus deterministic
-  checks to reject it.
-- [ ] Refine the harness from that evidence, then rerun the relevant task.
-- [ ] Leave with a portable kernel that can be adapted to another supported coding agent.
+- [ ] Capture an unrouted baseline answer about the service.
+- [ ] Add evidence and planning rows to the portable router, then compare fresh-session output.
+- [ ] Add anti-slop guidance and compare the same handoff prompt.
+- [ ] Add Python and transversal guidance before changing the daily Karma budget.
+- [ ] Write business tests, implement the daily limits, and run deterministic checks.
+- [ ] Add review guidance and challenge the result from a fresh context.
 
-Each attendee fully configures and validates one chosen host. The portable kernel and thin host
-adapter model make the harness transferable without requiring three integrations during the
-workshop.
+The portable router belongs in the companion harness repository. This repository supplies the
+project instructions, working happy path, and the daily-budget exercise.
 
 ## Setup
 
@@ -35,8 +28,9 @@ uv sync
 uv run uvicorn karma.app:app --reload
 ```
 
-The starter exposes `GET /health`. The Karma feature contract lives in
-`docs/context/karma/INDEX.md`.
+The baseline exposes `GET /health`, `POST /karma`, and `GET /karma/{person}`. It records non-zero
+adjustments in memory and returns the current UTC-day state. It intentionally does not enforce the
+daily `+5` and `-5` budgets. The feature contract lives in `docs/context/karma/INDEX.md`.
 
 ## Checks
 

@@ -23,6 +23,12 @@ current daily balance through a small HTTP API.
 The positive and negative limits are independent. A person can have both positive and negative
 adjustments on the same day if each directional total stays within its limit.
 
+## Workshop baseline and target
+
+The supplied baseline records non-zero adjustments and returns the current UTC-day state, but it
+does not enforce invariants 2 through 5. The workshop change adds that policy with business tests.
+Keep the policy outside the FastAPI handlers. The HTTP edge translates requests and responses only.
+
 ## HTTP contract
 
 ### `POST /karma`
@@ -39,12 +45,20 @@ Request body:
 ```
 
 The service returns a successful response for an accepted adjustment. A request that violates a
-Karma invariant returns a clear client error and leaves state unchanged.
+Karma invariant returns a clear client error and leaves state unchanged. The exact client-error
+shape is part of the daily-budget exercise.
 
 ### `GET /karma/{person}`
 
-Returns the named person's recorded adjustments and current UTC-day balance. The exact response
-shape is decided when the first endpoint test introduces it.
+Returns the named person's recorded adjustments and current UTC-day balance:
+
+```json
+{
+  "person": "Ada",
+  "adjustments": [1, -1],
+  "daily_balance": 0
+}
+```
 
 ## Storage and time
 

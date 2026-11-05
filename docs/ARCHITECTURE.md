@@ -5,15 +5,17 @@
 The service is a small HTTP API that records Karma adjustments and returns a person's current daily
 Karma state. It is a teaching surface, not a production system.
 
-## Starting point
+## Workshop baseline
 
-The starter has one FastAPI entry point and a health endpoint. The workshop adds Karma behavior in
-small changes so each abstraction has a concrete reason.
+The baseline has a FastAPI edge, typed Karma concepts, an in-memory ledger, and happy-path HTTP
+tests. It accepts non-zero adjustments and returns a person's current UTC-day state. It deliberately
+does not enforce the daily directional budgets.
 
 ## Intended boundaries
 
 - **HTTP edge:** FastAPI handlers translate HTTP requests and responses.
-- **Karma domain:** the ledger owns adjustment and daily-limit decisions.
+- **Karma domain:** typed concepts and the ledger own Karma state. The daily-budget policy is the
+  workshop change.
 - **Storage:** the core path uses in-memory state. SQLite is an optional adapter after the domain
   has a real persistence seam.
 
