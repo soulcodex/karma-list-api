@@ -22,12 +22,15 @@ Read the source before taking the matching action. Load only the rows the task n
 
 Do not preload every document. Read the smallest applicable context before planning or editing.
 
-## Verification
+## Verification pipeline
 
-- Run the narrowest relevant deterministic checks after a change.
-- Business tests must show an observable Karma rule or a credible regression.
-- Formatting, linting, type checking, and module-size checks support review. They do not prove
-  business behavior.
-- Run `uv run rumdl fmt --check --deny-config-warnings .` and
-  `uv run rumdl check --deny-config-warnings .` after changing Markdown.
-- Run `uv run python tools/check_type_boundaries.py src` after changing Python signatures.
+`docs/CODE_STYLE_GUIDES.md` owns the canonical command catalog. Select its smallest applicable
+pipeline for the changed surface, then report the commands and their results.
+
+1. Run formatting, static, and type checks that cover the changed boundary.
+2. Run focused behavior tests that prove the changed Karma rule or credible regression.
+3. Run the complete suite when the change crosses multiple boundaries or before a final handoff.
+
+Formatting, linting, type checking, and module-size checks support review. They do not prove a
+business invariant without a focused behavior test. Report and dispose of each warning or
+deprecation visibly.
