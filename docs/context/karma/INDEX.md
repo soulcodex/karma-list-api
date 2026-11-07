@@ -5,10 +5,13 @@
 Record positive and negative Karma for a person, then expose that person's recorded adjustments and
 current daily balance through a small HTTP API.
 
+This is the workshop's supplied product contract. It leaves implementation choices open so attendees
+can use their harness to make and verify them.
+
 ## Vocabulary
 
-- **Person:** the recipient of a Karma adjustment. The first version identifies a person by a
-  non-empty name.
+- **Person ID:** an opaque UUID that identifies the recipient of a Karma adjustment. It is an
+  identifier, not a display name or an assertion about identity.
 - **Adjustment:** one non-zero integer number of Karma points assigned to a person.
 - **Daily balance:** the sum of that person's adjustments for one UTC calendar day.
 
@@ -25,9 +28,9 @@ adjustments on the same day if each directional total stays within its limit.
 
 ## Workshop baseline and target
 
-The supplied baseline records non-zero adjustments and returns the current UTC-day state, but it
-does not enforce invariants 2 through 5. The workshop change adds that policy with business tests.
-Keep the policy outside the FastAPI handlers. The HTTP edge translates requests and responses only.
+The supplied baseline exposes only `GET /health`. Attendees build the Karma endpoints, typed
+concepts, storage, and daily-budget policy from this contract. Keep the policy outside the FastAPI
+handlers. The HTTP edge translates requests and responses only.
 
 ## HTTP contract
 
@@ -39,26 +42,43 @@ Request body:
 
 ```json
 {
-  "person": "Ada",
+  "person_id": "66e4e8b7-c91b-4cb4-a453-772560a792a7",
   "points": 1
 }
 ```
 
-The service returns a successful response for an accepted adjustment. A request that violates a
-Karma invariant returns a clear client error and leaves state unchanged. The exact client-error
-shape is part of the daily-budget exercise.
-
-### `GET /karma/{person}`
-
-Returns the named person's recorded adjustments and current UTC-day balance:
+An accepted adjustment returns `201`:
 
 ```json
 {
-  "person": "Ada",
+  "person_id": "66e4e8b7-c91b-4cb4-a453-772560a792a7",
+  "points": 1
+}
+```
+
+A request that would exceed either daily directional limit returns `409` with this response and
+leaves state unchanged:
+
+```json
+{
+  "detail": "daily Karma limit exceeded"
+}
+```
+
+### `GET /karma/{person_id}`
+
+Returns the identified person's recorded adjustments and current UTC-day balance:
+
+```json
+{
+  "person_id": "66e4e8b7-c91b-4cb4-a453-772560a792a7",
   "adjustments": [1, -1],
   "daily_balance": 0
 }
 ```
+
+An unknown person ID returns the same shape with an empty `adjustments` list and `daily_balance` of
+`0`.
 
 ## Storage and time
 
